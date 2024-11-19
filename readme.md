@@ -1,4 +1,6 @@
-## Aula 01 foi criado as seguinte páginas
+## Aulas foram criadas as seguinte páginas
+
+    Feito para o primeiro módulo do curso (com html css)
 
     - Login
     - Register
