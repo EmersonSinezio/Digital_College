@@ -6,3 +6,4 @@
     - Register
     - 404
     - página de esqueci minha senha
+    - Página de dashboard (Adicionada 19/11/2024)
