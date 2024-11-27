@@ -11,6 +11,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* Css do header */
 .header {
   width: 100%;
   height: 10vh;
@@ -67,4 +69,157 @@ body {
 }
 .header .logo {
   width: 10rem;
+}
+
+/* Css do menu lateral */
+.container .content {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.container .side_menu {
+  width: 20%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .side_menu .options {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.container .side_menu .options .option {
+  height: 4rem;
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 300ms ease;
+}
+.container .side_menu .options .option:hover {
+  background-color: #cccccc;
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+.active {
+  border-left: 5px blue solid;
+  transition: 0.5s;
+}
+.container .side_menu .options .option .icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .side_menu .options .option span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #5a5a5a;
+}
+.container .side_menu button {
+  width: 70%;
+  height: 3rem;
+  border: none;
+  background-color: #2a42ca;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  color: white;
+  margin-top: 2rem;
+}
+.container .side_menu button:hover {
+  cursor: pointer;
+  transition: ease 0.5s;
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.container .side_menu .options .option #content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.container .side_menu .options .option .showmore {
+  padding-right: 1rem;
+}
+.container .content .dashboard {
+  height: 90vh;
+  width: 100%;
+  padding: 2rem;
+  background-color: #f6f4f1;
+}
+/* Css do Dashboard (parte direita) */
+.container .content .dashboard .banner {
+  width: 100%;
+  margin: auto;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: #3c53d9;
+  display: flex;
+  justify-content: space-between;
+  color: wheat;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+.container .content .dashboard .banner .info {
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.container .content .dashboard .banner .info i {
+  margin: 0 0.5rem;
+}
+.container .content .dashboard .banner span {
+  padding: 0 1.5rem 0 0;
+}
+.container .content .dashboard .banner span:hover {
+  cursor: pointer;
+  transition: all 0.5s ease;
+  color: rgb(255, 255, 255);
+}
+
+.container .content .dashboard .cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.container .content .dashboard .cards .card {
+  width: 30%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  margin: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+.container .content .dashboard .cards .card i {
+  padding: 1.2rem;
+  border-radius: 50%;
+  background-color: #3c53d9;
+  margin-right: 1rem;
+}
+.container .content .dashboard .cards .card .card_icon,
+.container .content .dashboard .cards .card .card_info {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .content .dashboard .cards .card .card_info {
+  margin-top: 1rem;
+}
+.container .content .dashboard .cards .card .card_info h3 {
+  margin-top: 0.2rem;
 }

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
   </head>
   <body>
     <main class="container">
@@ -30,18 +34,115 @@
           />
         </div>
       </header>
-      <div class="subContainer">
-        <div class="menu">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Settings</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="content">
-        <h1>Bem-vindo ao seu dashboard</h1>
-      </div>
+      <section class="content">
+        <aside class="side_menu">
+          <div class="options">
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <span>Dashboard</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-brands fa-wpforms"></i>
+              </div>
+              <span>Forms</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-folder"></i>
+              </div>
+              <span>Cards</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-chart-simple"></i>
+              </div>
+              <span>Charts</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-arrow-pointer"></i>
+              </div>
+              <span>Buttons</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <span>Modals</span>
+            </div>
+            <div class="option" id="option">
+              <div class="icon">
+                <i class="fa-solid fa-table-list"></i>
+              </div>
+              <span>Tabbles</span>
+            </div>
+            <div class="option" id="option">
+              <div id="content">
+                <div class="icon">
+                  <i class="fa-solid fa-gauge"></i>
+                </div>
+                <span>Pages</span>
+              </div>
+              <div class="showmore">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+          <button>Create account</button>
+        </aside>
+        <aside class="dashboard">
+          <h1>Dashboard</h1>
+          <div class="banner">
+            <div class="info">
+              <i class="fa-solid fa-star"></i>
+              <span>Star this project on Github</span>
+            </div>
+            <span>View more</span>
+          </div>
+          <div class="cards">
+            <div class="card" id="first">
+              <div class="card_icon">
+                <i class="fa-solid fa-user-group"></i>
+              </div>
+              <div class="card_info">
+                <span>Total Clients</span>
+                <h3>6345</h3>
+              </div>
+            </div>
+            <div class="card" id="second">
+              <div class="card_icon">
+                <i class="fa-solid fa-money-bills"></i>
+              </div>
+              <div class="card_info">
+                <span>Account Balance</span>
+                <h3>R$34,670.00</h3>
+              </div>
+            </div>
+            <div class="card" id="third">
+              <div class="card_icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <div class="card_info">
+                <span>New Sales</span>
+                <h3>376</h3>
+              </div>
+            </div>
+            <div class="card" id="fourth">
+              <div class="card_icon">
+                <i class="fa-solid fa-comment"></i>
+              </div>
+              <div class="card_info">
+                <span>Pedding Contacts</span>
+                <h3>235</h3>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
     </main>
   </body>
+  <script src="./script.js"></script>
 </html>
