@@ -51,5 +51,5 @@ function valor_pintor(val1, val2) {
   }
 }
 
-valor_pintor(2, 2);
+valor_pintor(3, 3);
 valor_pintor(5, 5);
