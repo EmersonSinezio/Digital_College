@@ -126,7 +126,6 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Converte os valores para números
         const altura = parseFloat(alt.value) / 100; // Converte de cm para metros
         const peso = parseFloat(pes.value);
 
@@ -135,36 +134,28 @@
           return;
         }
 
-        // Calcula o IMC sem arredondar
         const imc = peso / (altura * altura);
 
-        // Atualiza o texto do valor do IMC
-        valueText.textContent = imc.toFixed(2); // Exibe o IMC arredondado com 2 casas decimais
+        valueText.textContent = imc.toFixed(2);
 
-        // Lógica de rotação e categoria do IMC
         let rotation;
 
         if (imc < 18.5) {
-          // Subpeso: Aponta para o limite de 270° (mais à esquerda)
           classification.textContent = "Subpeso";
           rotation = 270;
         } else if (imc >= 18.5 && imc <= 24.9) {
-          // Peso normal até sobrepeso: Aponta de 270° a 90°
           classification.textContent = "Normal";
           rotation = 270 + (imc - 18.5) * (90 / (30 - 18.5));
         } else if (imc >= 25 && imc <= 29.9) {
-          // IMC alto (entre 25,0 e 29,9): Aponta para o limite de 90° (sobrepeso)
           classification.textContent = "Sobrepeso";
           rotation = 0 + (imc - 25) * (90 / (30 - 25));
         } else if (imc > 30) {
-          // IMC alto (acima de 30): Aponta para o limite de 90° (obesidade)
           classification.textContent = "Obesidade";
           rotation = 90;
         } else {
           alert("Por favor, insira valores válidos.");
         }
 
-        // Aplica a rotação ao indicador
         indicator.style.transform = `rotate(${rotation}deg)`;
       });
     </script>
