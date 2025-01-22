@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consumo de api</title>
+    <script src="./script.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <!-- TODO: Resolver o bug do modal que quebra a aplicação quando aparece mostrar e alterar o layout -->
+    <div class="w-screen h-screen flex justify-center items-center bg-gray-200">
+      <div
+        class="w-2/4 bg-emerald-500 fixed hidden"
+        id="modal"
+        style="width: 60%; height: 70%"
+      >
+        <h1 class="text-3xl text-center my-4">Resultado</h1>
+        <div id="res"></div>
+        <div class="w-full flex justify-center items-center" style="bottom: 0">
+          <button
+            class="px-4 my-4 py-1 mx-4 w-32 bg-emerald-800 rounded-md text-black text-sm sm:text-lg shadow-md"
+          >
+            Save
+          </button>
+          <button
+            class="px-4 my-4 py-1 mx-4 w-32 bg-emerald-800 rounded-md text-black text-sm sm:text-lg shadow-md"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+      <!-- component -->
+      <div class="my-5">
+        <!-- Main container for the form, responsive to screen sizes -->
+        <div
+          class="container mx-auto max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl shadow-md dark:shadow-white py-4 px-6 sm:px-10 bg-white dark:bg-gray-800 border-emerald-500 rounded-md"
+        >
+          <div class="my-3">
+            <!-- Form title -->
+            <h1
+              class="text-center text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
+            >
+              Consultador de Cep
+            </h1>
+            <form action="" method="POST">
+              <!-- Input field for 'Name' -->
+              <div class="my-2">
+                <label
+                  for="name"
+                  class="text-sm sm:text-md font-bold text-gray-700 dark:text-gray-300"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  class="block w-full border border-emerald-500 outline-emerald-800 px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  id="name"
+                />
+              </div>
+
+              <!-- Input field for 'First Name' -->
+              <div class="my-2">
+                <label
+                  for="first_name"
+                  class="text-sm sm:text-md font-bold text-gray-700 dark:text-gray-300"
+                  >Cep</label
+                >
+                <input
+                  type="number"
+                  name="cep"
+                  class="block w-full border border-emerald-500 outline-emerald-800 px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  id="cep"
+                />
+              </div>
+
+              <!-- Input field for 'Class' -->
+              <div class="my-2">
+                <label
+                  for="class"
+                  class="text-sm sm:text-md font-bold text-gray-700 dark:text-gray-300"
+                  >Email</label
+                >
+                <input
+                  type="text"
+                  name="class"
+                  class="block w-full border border-emerald-500 outline-emerald-800 px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  id="class"
+                />
+              </div>
+
+              <!-- Save button -->
+              <button
+                class="px-4 my-4 py-1 w-full bg-emerald-500 rounded-md text-black text-sm sm:text-lg shadow-md"
+                onclick="showModal()"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

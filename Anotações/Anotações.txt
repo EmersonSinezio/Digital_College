@@ -1,2 +1,6 @@
 TAILWINDS UIS FREES
 -> https://flowbite.com/docs/forms/search-input/
+
+https://daily.dev/blog/10-free-tailwind-css-ui-kits-and-component-libraries-2024
+
+https://daisyui.com/components/card/
