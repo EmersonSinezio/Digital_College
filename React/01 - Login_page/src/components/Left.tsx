@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 const Left: React.FC = () => {
   return (
     <div className="w-[50vw] h-full flex justify-center align-middle flex-col">
@@ -50,17 +50,17 @@ const Left: React.FC = () => {
           </div>
         </div>
         <button
-          className="w-2/3 bg-blue-200 border border-gray-400 rounded hover:bg-transparent ease-in duration-300"
+          className="w-2/3 bg-blue-600 border border-gray-400 rounded hover:bg-blue-800 cursor-pointer ease-in duration-300"
           style={{ padding: ".5rem 1.5rem", margin: ".5rem 0" }}
         >
           Sign in
         </button>
         <button
-          className="w-2/3 bg-blue-600 text-white flex justify-center items-center rounded hover:bg-blue-800 cursor-pointer ease-in duration-300"
+          className="w-2/3 bg-blue-100 flex justify-center items-center border border-gray-300 rounded hover:bg-transparent ease-in duration-300"
           style={{ padding: ".5rem 1.5rem", margin: ".5rem 0" }}
         >
           {" "}
-          <FaGoogle className="w-5 h-5" />
+          <FcGoogle className="w-5 h-5" />
           <p style={{ margin: "0 .5rem " }}>Sign google</p>
         </button>
         <div>
