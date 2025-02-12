@@ -4,14 +4,13 @@ import { LuNfc } from "react-icons/lu";
 /*
     TODO: 
     1. Fazer validação de dados de cartão (se for numero não aceitar letras etc)
-    2. Fazer maneira de deixar os valores sempre a amostra sempre 16 digitos
-    3. Separar components para cada parte (passando os props)
+    2. Separar components para cada parte (passando os props)
+    3. Arrumar A parte do numero do cartão (mudar input para number e formatar)
 */
-
 const Container: React.FC = () => {
-  const [cartao, setCartao] = useState<string>("");
-  const [numero, setNumero] = useState<number>(0);
-  const [cvv, setCvv] = useState<number>(0);
+  const [cartao, setCartao] = useState<string>("Seu nome aqui");
+  const [numero, setNumero] = useState<string>("0000000000000000");
+  const [cvv, setCvv] = useState<string>("000");
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       {/* Parte da esquerda (cartões) */}
@@ -40,9 +39,12 @@ const Container: React.FC = () => {
               <LuNfc className="text-3xl" color="#D9D9D9" />
             </div>
           </div>
-          <h1 className="text-xl ">{numero}</h1>
-          <h1 className="text-3xl" style={{ marginTop: ".7rem" }}>
-            {cartao}
+          <h1 className="text-[1.5rem] w-full flex justify-between">
+            {numero.slice(0, 4)} {numero.slice(4, 8)} {numero.slice(8, 12)}{" "}
+            {numero.slice(12, 16)}{" "}
+          </h1>
+          <h1 className="text-2xl" style={{ marginTop: ".7rem" }}>
+            {cartao || "Seu nome aqui"}
           </h1>
         </div>
         {/* Cartao 2 */}
@@ -74,91 +76,127 @@ const Container: React.FC = () => {
           na internet
         </h1>
         <form action="" className="flex flex-col w-2/6 ">
-          <label htmlFor="" className="text-xl">
+          <label htmlFor="" className="text-xl" style={{ marginTop: ".5rem" }}>
             Nome do cartão
           </label>
           <input
             type="text"
             name=""
             id=""
-            className="w-full bg-[#D9D9D9]"
-            style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
+            className=" w-full bg-[#D9D9D9] rounded"
+            style={{
+              padding: ".5rem .5rem .5rem .8rem",
+              margin: ".5rem 0 0 0",
+            }}
             placeholder="Nome do cartão"
             onChange={(e) => setCartao(e.target.value)}
             maxLength={16}
           />
-          <label htmlFor="" className="text-xl">
+          <label htmlFor="" className="text-xl" style={{ marginTop: ".5rem" }}>
             Número do cartão
           </label>
           <input
             type="text"
             name=""
             id=""
-            className="w-full bg-[#D9D9D9]"
-            style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
+            className=" w-full bg-[#D9D9D9] rounded "
+            style={{
+              padding: ".5rem .5rem .5rem .8rem",
+              margin: ".5rem 0 0 0",
+            }}
             placeholder="0000 0000 0000 0000"
             maxLength={16}
-            onChange={(e) => setNumero(e.target.value)}
+            onChange={(e) => {
+              e.target.value.length >= 16 ? setNumero(e.target.value) : 0;
+            }}
           />
-          <div className="w-full flex justify-between">
+          <div
+            className="w-full flex justify-between gap-0.5"
+            style={{ marginTop: ".5rem" }}
+          >
+            <div className="w-full">
+              <label
+                htmlFor=""
+                className="text-xl"
+                style={{ marginTop: ".5rem" }}
+              >
+                Data de validade
+              </label>
+              <div className="flex gap-0.5">
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="MM"
+                  className=" w-full bg-[#D9D9D9] rounded"
+                  style={{
+                    padding: ".5rem .5rem .5rem .8rem",
+                    margin: ".5rem 0 0 0",
+                  }}
+                />
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="AA"
+                  className=" w-full bg-[#D9D9D9] rounded"
+                  style={{
+                    padding: ".5rem .5rem .5rem .8rem",
+                    margin: ".5rem .5rem 0 0",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="w-[35%]">
+              <label
+                htmlFor=""
+                className="text-xl"
+                style={{ marginTop: ".5rem" }}
+              >
+                CVV
+              </label>
+              <input
+                type="text"
+                name=""
+                id=""
+                className=" w-full rounded bg-[#D9D9D9]"
+                style={{
+                  padding: ".5rem .5rem .5rem .8rem",
+                  margin: ".5rem 0 0 0",
+                }}
+                placeholder="000"
+                maxLength={3}
+                onChange={(e) =>
+                  e.target.value.length >= 3 && setCvv(e.target.value)
+                }
+              />
+            </div>
+          </div>
+          <div style={{ marginTop: ".5rem" }}>
             <label htmlFor="" className="text-xl">
-              Data de expiração
+              Senha do cartão
             </label>
-            <label
-              htmlFor=""
-              className="text-xl"
-              style={{ margin: "0 2rem 0 0" }}
-            >
-              CVV
-            </label>
-          </div>
-          <div className="flex w-full gap-1">
             <input
-              type="text"
+              type="password"
               name=""
               id=""
-              className="w-[33%] bg-[#D9D9D9]"
-              style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
-              placeholder="MM"
-              maxLength={2}
-            />
-            <input
-              type="text"
-              name=""
-              id=""
-              className="w-[33%] bg-[#D9D9D9]"
-              style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
-              placeholder="AA"
-              maxLength={2}
-            />
-            <input
-              type="text"
-              name=""
-              id=""
-              className="w-[33%] bg-[#D9D9D9]"
-              style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
-              placeholder="CVV"
-              maxLength={3}
-              onChange={(e) => setCvv(e.target.value)}
+              className=" w-full bg-[#D9D9D9]"
+              style={{
+                padding: ".5rem .5rem .5rem .8rem",
+                margin: ".5rem 0 0 0",
+              }}
+              placeholder="*******"
             />
           </div>
-          <label htmlFor="" className="text-xl">
-            Senha do cartão
-          </label>
-          <input
-            type="password"
-            name=""
-            id=""
-            className="w-full bg-[#D9D9D9]"
-            style={{ padding: ".5rem 0 .5rem 0", margin: ".5rem 0 0 0" }}
-            placeholder="*******"
-          />
           <input
             type="submit"
             name=""
             id=""
-            className="bg-blue-300 rounded"
-            style={{ padding: ".5rem 0 .5rem 0", margin: "1rem 0 0 0 " }}
+            className=" bg-blue-300 rounded"
+            style={{
+              padding: ".5rem .5rem .5rem .8rem",
+              margin: "1rem 0 0 0 ",
+            }}
           />
         </form>
         <h1 className="text-gray-500" style={{ marginTop: "1rem" }}>
