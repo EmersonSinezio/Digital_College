@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcSimCardChip } from "react-icons/fc";
 import { LuNfc } from "react-icons/lu";
+import { ToastContainer, toast } from "react-toastify";
 /*
     TODO: 
     1. Fazer validação de dados de cartão (se for numero não aceitar letras etc)
@@ -9,10 +10,65 @@ import { LuNfc } from "react-icons/lu";
 */
 const Container: React.FC = () => {
   const [cartao, setCartao] = useState<string>("Seu nome aqui");
-  const [numero, setNumero] = useState<string>("0000000000000000");
+  const [numero, setNumero] = useState<string>("");
   const [cvv, setCvv] = useState<string>("000");
+
+  function handleCardNumber(e) {
+    let cardNumber = e.target.value;
+    let formatcardNumber = cardNumber.replace(/\D/g, "");
+    formatcardNumber = formatcardNumber.substring(0, 16);
+    formatcardNumber = formatcardNumber.replace(/(\d{4})/g, "$1 ").trim();
+    setNumero(formatcardNumber);
+  }
+
+  function sendCard(e) {
+    let nomeCartao = e.target[0].value;
+    let numeroCartao = e.target[1].value;
+    let MM = e.target[2].value;
+    let AA = e.target[3].value;
+    let CVV = e.target[4].value;
+    let senha = e.target[5].value;
+    e.preventDefault();
+    console.log(e);
+    console.log(nomeCartao, numeroCartao, MM, AA, CVV, senha);
+    if (!nomeCartao || !numeroCartao || !MM || !AA || !CVV || !senha) {
+      toast.error("Por favor insira todos os campos");
+    }
+    let numeroTeste = Number(numeroCartao);
+
+    console.log(typeof numeroTeste);
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (
+      Number(AA) < currentYear ||
+      (Number(AA) == currentYear && Number(MM) < currentMonth)
+    ) {
+      toast.error("O ano que foi digitado é inválido");
+      return;
+    }
+
+    if (senha.length < 4) {
+      toast.error("Senha menor que 4 digitos");
+    }
+  }
+
   return (
     <div className="w-screen h-screen flex justify-center items-center">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {/* Parte da esquerda (cartões) */}
       <div className="w-2/4 h-full bg-[#291641] flex justify-center items-center relative">
         {/* Cartao 1 */}
@@ -40,8 +96,7 @@ const Container: React.FC = () => {
             </div>
           </div>
           <h1 className="text-[1.5rem] w-full flex justify-between">
-            {numero.slice(0, 4)} {numero.slice(4, 8)} {numero.slice(8, 12)}{" "}
-            {numero.slice(12, 16)}{" "}
+            {numero || "0000 0000 0000 0000"}
           </h1>
           <h1 className="text-2xl" style={{ marginTop: ".7rem" }}>
             {cartao || "Seu nome aqui"}
@@ -58,7 +113,7 @@ const Container: React.FC = () => {
             style={{ marginTop: "2rem" }}
           >
             <p style={{ padding: ".2rem 1.5rem" }} className="text-black">
-              {cvv}
+              {cvv || "000"}
             </p>
           </div>
         </div>
@@ -75,7 +130,11 @@ const Container: React.FC = () => {
           </span>{" "}
           na internet
         </h1>
-        <form action="" className="flex flex-col w-2/6 ">
+        <form
+          action=""
+          onSubmit={(e) => sendCard(e)}
+          className="flex flex-col w-2/6 "
+        >
           <label htmlFor="" className="text-xl" style={{ marginTop: ".5rem" }}>
             Nome do cartão
           </label>
@@ -90,15 +149,12 @@ const Container: React.FC = () => {
             }}
             placeholder="Nome do cartão"
             onChange={(e) => setCartao(e.target.value)}
-            maxLength={16}
           />
           <label htmlFor="" className="text-xl" style={{ marginTop: ".5rem" }}>
             Número do cartão
           </label>
           <input
             type="text"
-            name=""
-            id=""
             className=" w-full bg-[#D9D9D9] rounded "
             style={{
               padding: ".5rem .5rem .5rem .8rem",
@@ -106,9 +162,7 @@ const Container: React.FC = () => {
             }}
             placeholder="0000 0000 0000 0000"
             maxLength={16}
-            onChange={(e) => {
-              e.target.value.length >= 16 ? setNumero(e.target.value) : 0;
-            }}
+            onChange={(e) => handleCardNumber(e)}
           />
           <div
             className="w-full flex justify-between gap-0.5"
@@ -125,9 +179,8 @@ const Container: React.FC = () => {
               <div className="flex gap-0.5">
                 <input
                   type="text"
-                  name=""
-                  id=""
                   placeholder="MM"
+                  maxLength={2}
                   className=" w-full bg-[#D9D9D9] rounded"
                   style={{
                     padding: ".5rem .5rem .5rem .8rem",
@@ -136,9 +189,8 @@ const Container: React.FC = () => {
                 />
                 <input
                   type="text"
-                  name=""
-                  id=""
                   placeholder="AA"
+                  maxLength={4}
                   className=" w-full bg-[#D9D9D9] rounded"
                   style={{
                     padding: ".5rem .5rem .5rem .8rem",
@@ -157,8 +209,6 @@ const Container: React.FC = () => {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
                 className=" w-full rounded bg-[#D9D9D9]"
                 style={{
                   padding: ".5rem .5rem .5rem .8rem",
@@ -166,9 +216,7 @@ const Container: React.FC = () => {
                 }}
                 placeholder="000"
                 maxLength={3}
-                onChange={(e) =>
-                  e.target.value.length >= 3 && setCvv(e.target.value)
-                }
+                onChange={(e) => setCvv(e.target.value)}
               />
             </div>
           </div>
@@ -178,8 +226,6 @@ const Container: React.FC = () => {
             </label>
             <input
               type="password"
-              name=""
-              id=""
               className=" w-full bg-[#D9D9D9]"
               style={{
                 padding: ".5rem .5rem .5rem .8rem",
