@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import { FcSimCardChip } from "react-icons/fc";
 import { LuNfc } from "react-icons/lu";
 import { ToastContainer, toast } from "react-toastify";
-/*
-    TODO: 
-    1. Fazer validação de dados de cartão (se for numero não aceitar letras etc)
-    2. Separar components para cada parte (passando os props)
-    3. Arrumar A parte do numero do cartão (mudar input para number e formatar)
-*/
-const Container: React.FC = () => {
+import instance from "../../api/instance.js";
+
+const Payments: React.FC = () => {
   const [cartao, setCartao] = useState<string>("Seu nome aqui");
   const [numero, setNumero] = useState<string>("");
   const [cvv, setCvv] = useState<string>("000");
 
-  function handleCardNumber(e) {
+  function handleCardNumber(e: React.ChangeEvent<HTMLInputElement>) {
     let cardNumber = e.target.value;
     let formatcardNumber = cardNumber.replace(/\D/g, "");
     formatcardNumber = formatcardNumber.substring(0, 16);
@@ -21,7 +17,7 @@ const Container: React.FC = () => {
     setNumero(formatcardNumber);
   }
 
-  function sendCard(e) {
+  function sendCard(e: React.FormEvent<HTMLFormElement>) {
     let nomeCartao = e.target[0].value;
     let numeroCartao = e.target[1].value;
     let MM = e.target[2].value;
@@ -29,29 +25,28 @@ const Container: React.FC = () => {
     let CVV = e.target[4].value;
     let senha = e.target[5].value;
     e.preventDefault();
-    console.log(e);
-    console.log(nomeCartao, numeroCartao, MM, AA, CVV, senha);
+
     if (!nomeCartao || !numeroCartao || !MM || !AA || !CVV || !senha) {
       toast.error("Por favor insira todos os campos");
     }
-    let numeroTeste = Number(numeroCartao);
-
-    console.log(typeof numeroTeste);
-
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
-
-    if (
-      Number(AA) < currentYear ||
-      (Number(AA) == currentYear && Number(MM) < currentMonth)
-    ) {
-      toast.error("O ano que foi digitado é inválido");
-      return;
-    }
-
     if (senha.length < 4) {
       toast.error("Senha menor que 4 digitos");
+    }
+
+    const currentDate = new Date();
+    const dateCard = new Date(`20${AA}`, MM - 1, 1);
+
+    try {
+      instance.post("/creditcards", {
+        name: nomeCartao,
+        number: numeroCartao,
+        expiration: `${MM}/${AA}`,
+        cvv: CVV,
+        password: senha,
+      });
+      toast.success("Dados enviados!");
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -69,7 +64,6 @@ const Container: React.FC = () => {
         pauseOnHover
         theme="colored"
       />
-      {/* Parte da esquerda (cartões) */}
       <div className="w-2/4 h-full bg-[#291641] flex justify-center items-center relative">
         {/* Cartao 1 */}
         <div
@@ -253,4 +247,4 @@ const Container: React.FC = () => {
   );
 };
 
-export default Container;
+export default Payments;
